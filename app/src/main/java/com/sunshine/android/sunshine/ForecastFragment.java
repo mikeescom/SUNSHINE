@@ -1,6 +1,5 @@
 package com.sunshine.android.sunshine;
 
-
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -25,9 +24,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.ws.rs.core.UriBuilder;
+
 public class ForecastFragment extends Fragment {
 
     private static final String OPEN_WEATHER_MAP_API_KEY = "f579add6647f68c2962c6405463a8057";
+    private String postCode = "94043";
     ArrayAdapter<String> mForecastAdapter;
 
     public ForecastFragment() {
@@ -45,7 +47,7 @@ public class ForecastFragment extends Fragment {
         if(id == R.id.action_refresh)
         {
             FetchWeatherTask weatherTask = new FetchWeatherTask();
-            weatherTask.execute();
+            weatherTask.execute(postCode);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -76,14 +78,18 @@ public class ForecastFragment extends Fragment {
         return rootView;
     }
 
-    public class FetchWeatherTask extends AsyncTask<Void, Void, Void>{
+    public class FetchWeatherTask extends AsyncTask<String, Void, Void>{
 
-        private static final String TAG = "FetchWeatherTask";
-        private String baseUrl = "http://api.openweathermap.org/data/2.5/forecast/daily?q=94043&mode=json&units=metric&cnt=7";
-        private final String LOG_TAG = FetchWeatherTask.class.getSimpleName();
+        private final String TAG = FetchWeatherTask.class.getSimpleName();
+        private String baseUrl = "http://api.openweathermap.org/data/2.5/forecast/daily";
+        private String postCode;
+        private String mode;
+        private String units;
+        private String cnt;
+        private String appid;
 
         @Override
-        protected Void doInBackground(Void... params) {
+        protected Void doInBackground(String... params) {
             HttpURLConnection urlConnection = null;
             BufferedReader reader = null;
             Log.d(TAG, "ENTRO");
@@ -91,8 +97,12 @@ public class ForecastFragment extends Fragment {
 
             try
             {
-                String apiKey = "&APPID=" + OPEN_WEATHER_MAP_API_KEY;
-                URL url = new URL(baseUrl.concat(apiKey));
+                postCode = "?q=" + params[0];
+                mode = "&mode=json";
+                units = "&units=metric";
+                cnt = "&cnt=7";
+                appid = "&APPID=" + OPEN_WEATHER_MAP_API_KEY;
+                URL url = new URL(baseUrl.concat(postCode).concat(mode).concat(units).concat(cnt).concat(appid));
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("GET");
                 urlConnection.connect();
@@ -108,7 +118,6 @@ public class ForecastFragment extends Fragment {
                 while ((line = reader.readLine()) != null)
                 {
                     buffer.append(line + "\n");
-                    Log.d("line: ", line);
                 }
 
                 if (buffer.length() == 0)
