@@ -44,8 +44,8 @@ public class ForecastFragment extends Fragment {
         int id = item.getItemId();
         if(id == R.id.action_refresh)
         {
-            new FetchWeatherTask().execute();
-            Log.d("TAG", "onOptionsItemSelected");
+            FetchWeatherTask weatherTask = new FetchWeatherTask();
+            weatherTask.execute();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -78,18 +78,19 @@ public class ForecastFragment extends Fragment {
 
     public class FetchWeatherTask extends AsyncTask<Void, Void, Void>{
 
+        private static final String TAG = "FetchWeatherTask";
+        private String baseUrl = "http://api.openweathermap.org/data/2.5/forecast/daily?q=94043&mode=json&units=metric&cnt=7";
         private final String LOG_TAG = FetchWeatherTask.class.getSimpleName();
 
         @Override
         protected Void doInBackground(Void... params) {
             HttpURLConnection urlConnection = null;
             BufferedReader reader = null;
-
+            Log.d(TAG, "ENTRO");
             String forecastJsonStr = null;
 
             try
             {
-                String baseUrl = "http://api.openweathermap.org/data/2.5/forecast/daily?q=94043&mode=json&units=metric&cnt=7";
                 String apiKey = "&APPID=" + OPEN_WEATHER_MAP_API_KEY;
                 URL url = new URL(baseUrl.concat(apiKey));
                 urlConnection = (HttpURLConnection) url.openConnection();
@@ -107,6 +108,7 @@ public class ForecastFragment extends Fragment {
                 while ((line = reader.readLine()) != null)
                 {
                     buffer.append(line + "\n");
+                    Log.d("line: ", line);
                 }
 
                 if (buffer.length() == 0)
@@ -114,10 +116,11 @@ public class ForecastFragment extends Fragment {
                     return null;
                 }
                 forecastJsonStr = buffer.toString();
+                Log.d(TAG, forecastJsonStr);
             }
             catch (IOException e)
             {
-                Log.e("ForecastFragment", "Error ", e);
+                Log.e(TAG, "Error ", e);
                 return null;
             }
             finally
@@ -134,7 +137,7 @@ public class ForecastFragment extends Fragment {
                     }
                     catch (final IOException e)
                     {
-                        Log.e(LOG_TAG, "Error closing stream", e);
+                        Log.e(TAG, "Error closing stream", e);
                     }
                 }
             }
