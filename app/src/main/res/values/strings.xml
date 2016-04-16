@@ -4,5 +4,6 @@
     <string name="action_refresh" translatable="false">Refresh</string>
     <string name="title_activity_detail">Details</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_setting">SettingActivity</string>
 
 </resources>
