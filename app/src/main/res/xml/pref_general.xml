@@ -12,7 +12,8 @@
     <ListPreference
         android:key="@string/pref_units_key"
         android:title="@string/pref_units_label"
+        android:defaultValue="@string/pref_units_default"
         android:entries="@array/store_names"
-        android:entryValues="@array/store_names" />
+        android:entryValues="@array/store_values" />
 
 </PreferenceScreen>

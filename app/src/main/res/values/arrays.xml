@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="store_names">
+        <item>Metric</item>
+        <item>Imperial</item>
+    </string-array>
+    <string-array name="store_values">
         <item>metric</item>
         <item>imperial</item>
     </string-array>

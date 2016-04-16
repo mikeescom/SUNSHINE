@@ -18,6 +18,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -99,6 +101,7 @@ public class ForecastFragment extends Fragment {
 
     public class FetchWeatherTask extends AsyncTask<String, Void, String[]>
     {
+        private static final String TAG = "FetchWeatherTask";
         private final String LOG_TAG = FetchWeatherTask.class.getSimpleName();
         private String getReadableDateString(long time)
         {
@@ -108,6 +111,17 @@ public class ForecastFragment extends Fragment {
 
         private String formatHighLows(double high, double low)
         {
+            SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            String unitType = sharedPrefs.getString(getString(R.string.pref_units_key), getString(R.string.pref_units_default));
+            /*if(unitType.equals("imperial"))
+            {
+                //high = (high * 1.8) + 32;
+                //low = (low * 1.8) + 32;
+            }
+            else
+            {
+                Log.d(TAG, "Unit type not found!");
+            }*/
             long roundedHigh = Math.round(high);
             long roundedLow = Math.round(low);
             String highLowStr = roundedHigh + "/" + roundedLow;
@@ -166,7 +180,6 @@ public class ForecastFragment extends Fragment {
             BufferedReader reader = null;
             String forecastJsonStr = null;
             String format = "json";
-            String units = "metric";
             int numDays = 7;
 
             try
