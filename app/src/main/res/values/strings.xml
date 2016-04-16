@@ -5,5 +5,8 @@
     <string name="title_activity_detail">Details</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_setting">SettingActivity</string>
+    <string name="pref_location_key">Location</string>
+    <string name="pref_location_label">Location</string>
+    <string name="pref_location_default">94043</string>
 
 </resources>
