@@ -13,6 +13,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.pref_general);
         bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_location_key)));
+        //bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_units_key)));
     }
 
     @Override
@@ -35,9 +36,9 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         return true;
     }
 
-    private void bindPreferenceSummaryToValue(Preference preference) {
+    private void bindPreferenceSummaryToValue(Preference preference)
+    {
         preference.setOnPreferenceChangeListener(this);
-
         onPreferenceChange(preference, PreferenceManager
                         .getDefaultSharedPreferences(preference.getContext())
                         .getString(preference.getKey(), ""));

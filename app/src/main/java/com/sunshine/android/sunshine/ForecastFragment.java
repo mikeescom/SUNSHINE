@@ -29,8 +29,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class ForecastFragment extends Fragment {
 
@@ -60,7 +58,8 @@ public class ForecastFragment extends Fragment {
             FetchWeatherTask weatherTask = new FetchWeatherTask();
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
             String location = preferences.getString(getString(R.string.pref_location_key), getString(R.string.pref_location_default));
-            weatherTask.execute(location);
+            String units = preferences.getString(getString(R.string.pref_units_key), getString(R.string.pref_units_default));
+            weatherTask.execute(location, units);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -87,9 +86,9 @@ public class ForecastFragment extends Fragment {
 
     private void updateWeather() {
         FetchWeatherTask weatherTask = new FetchWeatherTask();
-        String location = PreferenceManager.getDefaultSharedPreferences(getActivity())
-                .getString(getString(R.string.pref_location_key), getString(R.string.pref_location_default));
-        weatherTask.execute(location);
+        String location = PreferenceManager.getDefaultSharedPreferences(getActivity()).getString(getString(R.string.pref_location_key), getString(R.string.pref_location_default));
+        String units = PreferenceManager.getDefaultSharedPreferences(getActivity()).getString(getString(R.string.pref_units_key), getString(R.string.pref_units_default));
+        weatherTask.execute(location, units);
     }
 
     @Override
@@ -182,7 +181,7 @@ public class ForecastFragment extends Fragment {
                 Uri builtUri = Uri.parse(FORECAST_BASE_URL).buildUpon()
                         .appendQueryParameter(QUERY_PARAM, params[0])
                         .appendQueryParameter(FORMAT_PARAM, format)
-                        .appendQueryParameter(UNITS_PARAM, units)
+                        .appendQueryParameter(UNITS_PARAM, params[1])
                         .appendQueryParameter(DAYS_PARAM, Integer.toString(numDays))
                         .appendQueryParameter(APPID_PARAM, "f579add6647f68c2962c6405463a8057")
                         .build();

@@ -8,5 +8,8 @@
     <string name="pref_location_key">Location</string>
     <string name="pref_location_label">Location</string>
     <string name="pref_location_default">94043</string>
+    <string name="pref_units_key">Units</string>
+    <string name="pref_units_label">Units</string>
+    <string name="pref_units_default">metric</string>
 
 </resources>
