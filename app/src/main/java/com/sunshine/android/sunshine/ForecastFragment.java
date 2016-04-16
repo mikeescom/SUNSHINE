@@ -89,7 +89,7 @@ public class ForecastFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent showDetailActivity = new Intent(getActivity(), DetailActivity.class);
-                context.startService(showDetailActivity);
+                context.startActivity(showDetailActivity);
                 Toast toast = Toast.makeText(context, "List has been clicked!", Toast.LENGTH_LONG);
                 toast.show();
             }
