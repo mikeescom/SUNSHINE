@@ -1,7 +1,6 @@
 package com.sunshine.android.sunshine;
 
 import android.test.suitebuilder.TestSuiteBuilder;
-
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
