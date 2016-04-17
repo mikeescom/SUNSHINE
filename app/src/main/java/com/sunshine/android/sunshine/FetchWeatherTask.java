@@ -106,9 +106,6 @@ public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
 
-        // Will contain the raw JSON response as a string.
-        String forecastJsonStr = null;
-
         String format = "json";
         int numDays = 14;
 
@@ -156,7 +153,7 @@ public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
                 // Stream was empty.  No point in parsing.
                 return null;
             }
-            forecastJsonStr = buffer.toString();
+
         } catch (IOException e) {
             Log.e(LOG_TAG, "Error ", e);
             // If the code didn't successfully get the weather data, there's no point in attemping
