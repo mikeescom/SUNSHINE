@@ -66,16 +66,16 @@ public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
         // we start storing the values in a database.
         SharedPreferences sharedPrefs =
                 PreferenceManager.getDefaultSharedPreferences(mContext);
-        String unitType = sharedPrefs.getString(
-                mContext.getString(R.string.pref_units_key),
-                mContext.getString(R.string.pref_units_metric));
+//        String unitType = sharedPrefs.getString(
+//                mContext.getString(R.string.pref_units_key),
+//                mContext.getString(R.string.pref_units_metric));
 
-        if (unitType.equals(mContext.getString(R.string.pref_units_imperial))) {
-            high = (high * 1.8) + 32;
-            low = (low * 1.8) + 32;
-        } else if (!unitType.equals(mContext.getString(R.string.pref_units_metric))) {
-            Log.d(LOG_TAG, "Unit type not found: " + unitType);
-        }
+//        if (unitType.equals(mContext.getString(R.string.pref_units_imperial))) {
+//            high = (high * 1.8) + 32;
+//            low = (low * 1.8) + 32;
+//        } else if (!unitType.equals(mContext.getString(R.string.pref_units_metric))) {
+//            Log.d(LOG_TAG, "Unit type not found: " + unitType);
+//        }
 
         // For presentation, assume the user doesn't care about tenths of a degree.
         long roundedHigh = Math.round(high);
@@ -206,7 +206,7 @@ public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
             long locationId = addLocation(locationSetting, cityName, cityLatitude, cityLongitude);
 
             // Insert the new weather information into the database
-            Vector<ContentValues> cVVector = new Vector<ContentValues>(weatherArray.length());
+            Vector<ContentValues> cVVector = new Vector<>(weatherArray.length());
 
             // OWM returns daily forecasts based upon the local time of the city that is being
             // asked for, which means that we need to know the GMT offset to translate this data
@@ -338,21 +338,19 @@ public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
         int numDays = 14;
 
         try {
-            // Construct the URL for the OpenWeatherMap query
-            // Possible parameters are avaiable at OWM's forecast API page, at
-            // http://openweathermap.org/API#forecast
-            final String FORECAST_BASE_URL =
-                    "http://api.openweathermap.org/data/2.5/forecast/daily?";
+            final String FORECAST_BASE_URL = "http://api.openweathermap.org/data/2.5/forecast/daily?";
             final String QUERY_PARAM = "q";
             final String FORMAT_PARAM = "mode";
             final String UNITS_PARAM = "units";
             final String DAYS_PARAM = "cnt";
+            final String APPID_PARAM = "APPID";
 
             Uri builtUri = Uri.parse(FORECAST_BASE_URL).buildUpon()
                     .appendQueryParameter(QUERY_PARAM, params[0])
                     .appendQueryParameter(FORMAT_PARAM, format)
-                    .appendQueryParameter(UNITS_PARAM, units)
+                    .appendQueryParameter(UNITS_PARAM, params[1])
                     .appendQueryParameter(DAYS_PARAM, Integer.toString(numDays))
+                    .appendQueryParameter(APPID_PARAM, "f579add6647f68c2962c6405463a8057")
                     .build();
 
             URL url = new URL(builtUri.toString());

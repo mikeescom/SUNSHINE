@@ -69,9 +69,9 @@ public class ForecastFragment extends Fragment {
     private void updateWeather() {
         FetchWeatherTask weatherTask = new FetchWeatherTask(getActivity(), mForecastAdapter);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String location = prefs.getString(getString(R.string.pref_location_key),
-                getString(R.string.pref_location_default));
-        weatherTask.execute(location);
+        String location = prefs.getString(getString(R.string.pref_location_key), getString(R.string.pref_location_default));
+        String units = prefs.getString(getString(R.string.pref_units_key), getString(R.string.pref_units_default));
+        weatherTask.execute(location, units);
     }
 
     @Override
