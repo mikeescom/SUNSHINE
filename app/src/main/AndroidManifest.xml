@@ -40,5 +40,6 @@
             android:name=".data.WeatherProvider"
             android:authorities="com.sunshine.android.sunshine"/>
         <service android:name=".service.SunshineService"/>
+        <receiver android:name=".service.SunshineService$AlarmReceiver" android:enabled="true"/>
     </application>
 </manifest>
