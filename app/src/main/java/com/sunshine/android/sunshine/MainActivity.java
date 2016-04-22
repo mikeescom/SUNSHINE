@@ -32,9 +32,9 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
             // adding or replacing the detail fragment using a
             // fragment transaction.
             if (savedInstanceState == null) {
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.weather_detail_container, new DetailFragment(), DETAILFRAGMENT_TAG)
-                        .commit();
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.weather_detail_container, new DetailFragment(), DETAILFRAGMENT_TAG)
+                            .commit();
             }
         } else {
             mTwoPane = false;
@@ -44,7 +44,6 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
         ForecastFragment forecastFragment =  ((ForecastFragment)getSupportFragmentManager()
                 .findFragmentById(R.id.fragment_forecast));
         forecastFragment.setUseTodayLayout(!mTwoPane);
-
         SunshineSyncAdapter.initializeSyncAdapter(this);
     }
 
