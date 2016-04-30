@@ -1,25 +1,26 @@
 package com.sunshine.android.sunshine;
 
-        import android.content.Intent;
-        import android.database.Cursor;
-        import android.net.Uri;
-        import android.os.Bundle;
-        import android.support.v4.app.Fragment;
-        import android.support.v4.app.LoaderManager;
-        import android.support.v4.content.CursorLoader;
-        import android.support.v4.content.Loader;
-        import android.util.Log;
-        import android.view.LayoutInflater;
-        import android.view.Menu;
-        import android.view.MenuInflater;
-        import android.view.MenuItem;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.AdapterView;
-        import android.widget.ListView;
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.TextView;
 
-        import com.sunshine.android.sunshine.data.WeatherContract;
-        import com.sunshine.android.sunshine.sync.SunshineSyncAdapter;
+import com.sunshine.android.sunshine.data.WeatherContract;
+import com.sunshine.android.sunshine.sync.SunshineSyncAdapter;
 
 /**
  * Encapsulates fetching the forecast and displaying it as a {@link ListView} layout.
@@ -240,6 +241,7 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
             // to, do so now.
             mListView.smoothScrollToPosition(mPosition);
         }
+        updateEmptyView();
     }
 
     @Override
@@ -251,6 +253,24 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
         mUseTodayLayout = useTodayLayout;
         if (mForecastAdapter != null) {
             mForecastAdapter.setUseTodayLayout(mUseTodayLayout);
+        }
+    }
+
+    /*
+        Updates the empty list view with contextually relevant information that the user can
+        use to determine why they aren't seeing weather.
+     */
+    private void updateEmptyView() {
+        if ( mForecastAdapter.getCount() == 0 ) {
+            TextView tv = (TextView) getView().findViewById(R.id.listview_forecast_empty);
+            if ( null != tv ) {
+                // if cursor is empty, why? do we have an invalid location
+                int message = R.string.empty_forecast_list;
+                if (!Utility.isNetworkAvailable(getActivity()) ) {
+                    message = R.string.empty_forecast_list_no_network;
+                }
+                tv.setText(message);
+            }
         }
     }
 }

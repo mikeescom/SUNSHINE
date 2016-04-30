@@ -2,6 +2,8 @@ package com.sunshine.android.sunshine;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
 import android.text.format.Time;
 
@@ -12,7 +14,8 @@ import java.util.Date;
 public class Utility {
     public static String getPreferredLocation(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        return prefs.getString(context.getString(R.string.pref_location_key), context.getString(R.string.pref_location_default));
+        return prefs.getString(context.getString(R.string.pref_location_key),
+                context.getString(R.string.pref_location_default));
     }
 
     public static boolean isMetric(Context context) {
@@ -229,5 +232,20 @@ public class Utility {
             return R.drawable.art_clouds;
         }
         return -1;
+    }
+
+    /**
+     * Returns true if the network is available or about to become available.
+     *
+     * @param c Context used to get the ConnectivityManager
+     * @return
+     */
+    static public boolean isNetworkAvailable(Context c) {
+        ConnectivityManager cm =
+                (ConnectivityManager)c.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        return activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
     }
 }
