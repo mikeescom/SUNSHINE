@@ -32,5 +32,5 @@
     <string name="sync_account_type">sunshine.example.com</string>
     <string name="content_authority">com.sunshine.android.sunshine</string>
     <string name="format_notification">Forecast: <xliff:g id="condition">%1$s</xliff:g> High: <xliff:g id="high">%2$s</xliff:g> Low: <xliff:g id="low">%3$s</xliff:g></string>
-    <string name="pref_last_notification">last_notification</string>
+    <string name="empty_forecast_list">No Weather Information Available</string>
 </resources>
