@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sunshine.android.sunshine">
+    package="com.sunshine.android.sunshine" >
 
+    <!-- This permission is necessary in order for Sunshine to perform network access. -->
     <uses-permission android:name="android.permission.INTERNET" />
 
     <!-- Permissions required by the sync adapter -->
@@ -11,9 +12,10 @@
         android:name="android.permission.WRITE_SYNC_SETTINGS"/>
     <uses-permission
         android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
+
+    <!-- Permissions required to make our UI more friendly -->
     <uses-permission
         android:name="android.permission.ACCESS_NETWORK_STATE" />
-
 
     <application
         android:allowBackup="true"
@@ -76,4 +78,5 @@
                 android:resource="@xml/syncadapter" />
         </service>
     </application>
+
 </manifest>
