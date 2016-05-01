@@ -11,6 +11,8 @@
     <string name="pref_location_key" translatable="false">location</string>
     <string name="pref_location_status_key" translatable="false">loc-status</string>
     <string name="pref_location_default" translatable="false">MexicoCity</string>
+    <string name="pref_location_error_description">Invalid Location (<xliff:g id="location_setting">%1$s</xliff:g>)"</string>
+    <string name="pref_location_unknown_description">Validating Location... (<xliff:g id="location_setting">%1$s</xliff:g>)"</string>
     <string name="pref_enable_notifications_key" translatable="false">enable_notifications</string>
     <string name="pref_enable_notifications_label">Weather Notifications</string>
     <string name="pref_enable_notifications_true">Enabled</string>
