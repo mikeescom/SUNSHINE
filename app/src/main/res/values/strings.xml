@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="http://schemas.android.com/apk/res-auto">
 
+    <!--
+         Used in Action Bar, and in AndroidManifest to tell the device the name of this app.
+         It's to keep this short, so your launcher icon isn't displayed with "The greatest Wea"
+         or something similar.
+    -->
     <string name="app_name">Sunshine</string>
+
+    <!--
+         By convention, "action" denotes that this String will be used as the label for an Action,
+         typically from the action bar.  The ActionBar is limited real estate, so shorter is better.
+    -->
     <string name="action_settings">Settings</string>
     <string name="action_map">Map Location</string>
     <string name="action_share">Share</string>
@@ -180,4 +190,8 @@
     <string name="condition_962">Hurricane</string>
 
     <string name="condition_unknown">Unknown (<xliff:g id="low">%1$s</xliff:g>)</string>
+
+    <!-- Used to form a severe weather alert that reads "Heads up: <weather> in <location>!" -->
+    <string name="gcm_weather_alert">Heads up: %1$s in %2$s!</string>
+
 </resources>
