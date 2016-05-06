@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="background_detail">#AAFFEE</color>
-    <color name="background_main">#AAFFEE</color>
+    <color name="white">#FFFFFF</color>
+    <color name="grey">#cccccc</color>
+    <color name="grey_700">#646464</color>
+    <color name="black">#000000</color>
 
-    <color name="white">#FFFF55</color>
-    <color name="grey">#cccc55</color>
-    <color name="grey_700">#646455</color>
-    <color name="black">#000055</color>
-
-    <color name="sunshine_light_blue">#ff64c200</color>
-    <color name="sunshine_blue">#ff1ca800</color>
-    <color name="sunshine_dark_blue">#028800</color>
+    <!-- using the "Light Blue" Material Palette -->
+    <color name="primary">#03A9F4</color>  <!-- 500 -->
+    <color name="primary_dark">#0288D1</color>  <!-- 700 -->
+    <color name="primary_light">#B3E5FC</color> <!-- 100 -->
+    <color name="accent">#FFD740</color>
 
 </resources>
