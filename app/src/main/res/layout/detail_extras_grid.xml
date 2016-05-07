@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!-- Detail Layout for Grid -->
 <android.support.v7.widget.GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -72,3 +72,4 @@
         app:layout_gravity="fill"
         tools:text="4km/h NW" />
 </android.support.v7.widget.GridLayout>
+
