@@ -14,13 +14,18 @@
      See the License for the specific language governing permissions and
      limitations under the License.
  -->
-<resources>
-    <declare-styleable name="LocationEditTextPreference">
-        <attr name="minLength" format="integer" />
-    </declare-styleable>
-    <declare-styleable name="ForecastFragment">
-        <attr name="android:choiceMode" />
-        <attr name="autoSelectView" format="boolean"/>
-        <attr name="sharedElementTransitions" format="boolean"/>
-    </declare-styleable>
-</resources>
+<transitionSet xmlns:android="http://schemas.android.com/apk/res/android"
+    android:transitionOrdering="together"
+    android:duration="250">
+    <fade>
+        <targets>
+            <target android:excludeId="@android:id/statusBarBackground" />
+            <target android:excludeId="@android:id/navigationBarBackground" />
+        </targets>
+    </fade>
+    <slide android:slideEdge="right">
+        <targets>
+            <target android:targetId="@id/detail_additional_pane" />
+        </targets>
+    </slide>
+</transitionSet>
