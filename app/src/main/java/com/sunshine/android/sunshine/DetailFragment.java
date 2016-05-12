@@ -56,7 +56,8 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
             WeatherEntry.COLUMN_WEATHER_ID,
             // This works because the WeatherProvider returns location data joined with
             // weather data, even though they're stored in two different tables.
-            WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING
+            WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING,
+            WeatherContract.LocationEntry.COLUMN_CITY_NAME
     };
 
     // These indices are tied to DETAIL_COLUMNS.  If DETAIL_COLUMNS changes, these
@@ -72,6 +73,9 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     public static final int COL_WEATHER_DEGREES = 8;
     public static final int COL_WEATHER_CONDITION_ID = 9;
 
+    public static final int COL_LOCATION_SETTING = 10;
+    public static final int COL_LOCATION_CITY_NAME = 11;
+
     private ImageView mIconView;
     private TextView mDateView;
     private TextView mDescriptionView;
@@ -83,6 +87,8 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     private TextView mWindLabelView;
     private TextView mPressureView;
     private TextView mPressureLabelView;
+    private TextView mLocSettingView;
+    private TextView mCityNameView;
 
     public DetailFragment() {
         setHasOptionsMenu(true);
@@ -110,6 +116,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
         mWindLabelView = (TextView) rootView.findViewById(R.id.detail_wind_label_textview);
         mPressureView = (TextView) rootView.findViewById(R.id.detail_pressure_textview);
         mPressureLabelView = (TextView) rootView.findViewById(R.id.detail_pressure_label_textview);
+        mCityNameView = (TextView) rootView.findViewById(R.id.detail_city_name_textview);
         return rootView;
     }
 
@@ -244,6 +251,11 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
             mPressureView.setText(getString(R.string.format_pressure, pressure));
             mPressureView.setContentDescription(getString(R.string.a11y_pressure, mPressureView.getText()));
             mPressureLabelView.setContentDescription(mPressureView.getContentDescription());
+
+            // Read city name
+            String cityName = data.getString(COL_LOCATION_CITY_NAME);
+            mCityNameView.setText(cityName);
+            mCityNameView.setContentDescription(cityName);
 
             // We still need this for the share intent
             mForecast = String.format("%s - %s - %s/%s", dateText, description, high, low);
